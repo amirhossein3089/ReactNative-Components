@@ -12,6 +12,7 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import Nav from "./Nav/nav";
 import Generator from "./Generator/generator"
 import ListItem from "./Generator/listItem"
+import Input from "./Input/input"
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -48,6 +49,7 @@ export default class App extends Component<Props> {
         <Nav nameofapp={this.state.nameOfapplication}/>
         <Generator add={this.onAddRandom} />
         <ListItem items={this.state.random} onDeleteItem={this.onItemDelete}/>
+        <Input/>
       </View>
     );
   }
