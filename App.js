@@ -7,12 +7,13 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View, ScrollView } from "react-native";
+import { Platform, StyleSheet, Text, View, ScrollView, ActivityIndicator } from "react-native";
 
 import Nav from "./Nav/nav";
 import Generator from "./Generator/generator";
 import ListItem from "./Generator/listItem";
 import Input from "./Input/input";
+import Picker from "./Picker/picker";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -25,7 +26,8 @@ type Props = {};
 export default class App extends Component<Props> {
   state = {
     nameOfapplication: "My Awsome App",
-    random: [20, 13]
+    random: [20, 13],
+    loading:false,
   };
   onAddRandom = () => {
     const random = Math.floor(Math.random() * 100) + 1;
@@ -54,7 +56,9 @@ export default class App extends Component<Props> {
               items={this.state.random}
               onDeleteItem={this.onItemDelete}
             />
-            <Input />
+            {/* <Input /> */}
+            <Picker/>
+            <ActivityIndicator size="large" color="red" animating={this.state.loading}/>
           </View>
         </ScrollView>
       </View>
