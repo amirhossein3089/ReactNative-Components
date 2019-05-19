@@ -7,12 +7,12 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View, ScrollView } from "react-native";
 
 import Nav from "./Nav/nav";
-import Generator from "./Generator/generator"
-import ListItem from "./Generator/listItem"
-import Input from "./Input/input"
+import Generator from "./Generator/generator";
+import ListItem from "./Generator/listItem";
+import Input from "./Input/input";
 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
@@ -24,32 +24,39 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   state = {
-    nameOfapplication:'My Awsome App',
-    random:[20,13]
-  } 
-  onAddRandom = ()=>{
-    const random = Math.floor(Math.random()*100) +1;
-    this.setState(prevState=>{
+    nameOfapplication: "My Awsome App",
+    random: [20, 13]
+  };
+  onAddRandom = () => {
+    const random = Math.floor(Math.random() * 100) + 1;
+    this.setState(prevState => {
       return {
-        random:[...prevState.random, random]
-      }
-    })
-  }
-  onItemDelete=(index)=>{
-    const newArray = this.state.random.filter((item,i)=>{
+        random: [...prevState.random, random]
+      };
+    });
+  };
+  onItemDelete = index => {
+    const newArray = this.state.random.filter((item, i) => {
       return index !== i;
-    })
+    });
     this.setState({
-      random:newArray
-    })
-  }
+      random: newArray
+    });
+  };
   render() {
     return (
       <View style={styles.container}>
-        <Nav nameofapp={this.state.nameOfapplication}/>
-        <Generator add={this.onAddRandom} />
-        <ListItem items={this.state.random} onDeleteItem={this.onItemDelete}/>
-        <Input/>
+        <Nav nameofapp={this.state.nameOfapplication} />
+        <ScrollView style={{ width: "100%" }}>
+          <View style={styles.wrapper}>
+            <Generator add={this.onAddRandom} />
+            <ListItem
+              items={this.state.random}
+              onDeleteItem={this.onItemDelete}
+            />
+            <Input />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -60,7 +67,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#F5FCFF",
-
+    backgroundColor: "#F5FCFF"
+  },
+  wrapper:{
+    flex:1,
+    width:'100%',
+    padding:20,
+    alignItems:'center',
+    justifyContent:'flex-start',
   }
 });
