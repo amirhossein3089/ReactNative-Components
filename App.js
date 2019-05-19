@@ -7,14 +7,16 @@
  */
 
 import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View, ScrollView, ActivityIndicator } from "react-native";
+import { Platform, StyleSheet, Text, View, ScrollView, ActivityIndicator, Image } from "react-native";
 
 import Nav from "./Nav/nav";
 import Generator from "./Generator/generator";
 import ListItem from "./Generator/listItem";
 import Input from "./Input/input";
 import Picker from "./Picker/picker";
-
+import Metro from "./assets/images/metro.jpg"
+import ModalComponent from "./Modal/modal"
+ 
 const instructions = Platform.select({
   ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
   android:
@@ -57,8 +59,13 @@ export default class App extends Component<Props> {
               onDeleteItem={this.onItemDelete}
             />
             {/* <Input /> */}
-            <Picker/>
-            <ActivityIndicator size="large" color="red" animating={this.state.loading}/>
+            {/* <Picker/>
+            <ActivityIndicator size="large" color="red" animating={this.state.loading}/> */}
+
+            <Image source={Metro} style={styles.metro} resizeMode="contain"/>
+            <Image source={{uri:'https://picsum.photos/id/767/400/400'}} style={styles.metro} resizeMode="contain"/>
+
+            <ModalComponent/>
           </View>
         </ScrollView>
       </View>
@@ -79,5 +86,10 @@ const styles = StyleSheet.create({
     padding:20,
     alignItems:'center',
     justifyContent:'flex-start',
+  },
+  metro:{
+    width:'100%',
+    height:300,
+    marginTop: 20,
   }
 });
